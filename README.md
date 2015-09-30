@@ -12,6 +12,15 @@ Pygame, unfortunately, is tricky (though [not impossible](http://askubuntu.com/q
 
 Once the dependencies are installed, simply run the `test.py` script to test out the simulator.
 
+## Troubleshooting
+
+When running `python run.py <file>`, you may be presented with an error: `ImportError: No module named 'robot'`. This may be due to a conflict between sr.tools and sr.robot. To resolve, symlink simulator/sr/robot to the location of sr.tools.
+
+On Ubuntu, this can be accomplished by:
+* Find the location of srtools: `pip show sr.tools`
+* Get the location. In my case this was `/usr/local/lib/python2.7/dist-packages`
+* Create symlink: `ln -s path/to/simulator/sr/robot /usr/local/lib/python2.7/dist-packages/sr/`
+
 Writing and running a program
 -----------------------------
 
