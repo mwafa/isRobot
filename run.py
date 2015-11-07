@@ -32,7 +32,7 @@ class RobotThread(threading.Thread):
         threading.Thread.__init__(self, *args, **kwargs)
         self.zone = zone
         self.script = script
-        self.setDaemon(True)
+        self.daemon = True
 
     def run(self):
         def robot():
