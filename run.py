@@ -25,7 +25,7 @@ while not robot_scripts:
 with args.config as f:
     config = yaml.load(f)
 
-sim = Simulator(config, foreground=True)
+sim = Simulator(config, background=False)
 
 class RobotThread(threading.Thread):
     def __init__(self, zone, script, *args, **kwargs):
