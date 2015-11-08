@@ -49,9 +49,21 @@ class RobotThread(threading.Thread):
 
         exec self.script in {'Robot': robot}
 
+threads = []
 for zone, robot in enumerate(robot_scripts):
     thread = RobotThread(zone, robot)
     thread.start()
+    threads.append(thread)
 
 sim.run()
 
+# Warn PyScripter users that despite the exit of the main thread, the daemon
+# threads won't actually have gone away. See commit 8cad7add for more details.
+threads = [t for t in threads if t.is_alive()]
+if threads:
+    print("WARNING: {0} robot code threads still active.".format(len(threads)))
+    #####                                                               #####
+    # If you see the above warning in PyScripter and you want to kill your  #
+    # robot code you can press Ctrl+F2 to re-initialize the interpreter and #
+    # stop the code running.                                                #
+    #####                                                               #####
