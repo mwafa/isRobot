@@ -93,7 +93,7 @@ class SimRobot(GameObject):
     def __init__(self, simulator):
         self._body = None
         self.zone = 0
-        GameObject.__init__(self, simulator.arena)
+        super(SimRobot, self).__init__(simulator.arena)
         self.motors = [Motor(self)]
         make_body = simulator.arena._physics_world.create_body
         half_width = self.width * 0.5

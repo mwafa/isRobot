@@ -32,7 +32,7 @@ class Token(GameObject):
                                                       linear_damping=damping,
                                                       angular_damping=damping,
                                                       type=pypybox2d.body.Body.DYNAMIC)
-        GameObject.__init__(self, arena)
+        super(Token, self).__init__(arena)
         self.marker_info = create_marker_info_by_type(MARKER_TOKEN, number)
         self.grabbed = False
         WIDTH=0.08
@@ -58,7 +58,7 @@ class WallMarker(GameObject):
     surface_name = 'sr/wall_marker.png'
 
     def __init__(self, arena, number, location=(0,0), heading=0):
-        GameObject.__init__(self, arena)
+        super(WallMarker, self).__init__(arena)
         self.marker_info = create_marker_info_by_type(MARKER_ARENA, number)
         self.location = location
         self.heading = heading

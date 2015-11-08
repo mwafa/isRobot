@@ -33,7 +33,7 @@ sim = Simulator(config, background=False)
 
 class RobotThread(threading.Thread):
     def __init__(self, zone, script, *args, **kwargs):
-        threading.Thread.__init__(self, *args, **kwargs)
+        super(RobotThread, self).__init__(*args, **kwargs)
         self.zone = zone
         self.script = script
         self.daemon = True
