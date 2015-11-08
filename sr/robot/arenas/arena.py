@@ -16,6 +16,22 @@ ARENA_FLOOR_COLOR = (0x11, 0x18, 0x33)
 ARENA_MARKINGS_COLOR = (0xD0, 0xD0, 0xD0)
 ARENA_MARKINGS_WIDTH = 2
 
+CORNER_COLOURS = (
+    (0x00, 0xff, 0x00),
+    (0xff, 0x66, 0x00),
+    (0xff, 0x00, 0xff),
+    (0xff, 0xff, 0x00),
+)
+
+def apply_transparency(foreground, background, opacity):
+    def helper(fore, back):
+        return back + (fore-back)*opacity
+    return tuple(map(helper, foreground, background))
+
+def fade_to_white(colour, opacity = 0.6):
+    white = (0xff,) * 3
+    return apply_transparency(colour, white, opacity)
+
 def lerp(delta, a, b):
     return delta*b + (1-delta)*a
 
@@ -38,6 +54,13 @@ class Arena(object):
     @property
     def bottom(self):
         return self.size[1] / 2
+
+    @property
+    def corners(self):
+        yield (self.left, self.top)
+        yield (self.right, self.top)
+        yield (self.right, self.bottom)
+        yield (self.left, self.bottom)
 
     def _populate_wall(self, left, right, count, start, angle):
         left_bound_x, left_bound_y = left
