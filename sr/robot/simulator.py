@@ -32,7 +32,7 @@ class Simulator(object):
 
     def run(self):
         if self.background:
-            raise RuntimeError('Simulator runs in the background. Try passing foreground=True')
+            raise RuntimeError('Simulator runs in the background. Try passing background=False')
         self._main_loop(self.frames_per_second)
 
     def _main_loop(self, frames_per_second):
