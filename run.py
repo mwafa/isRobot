@@ -15,12 +15,16 @@ parser.add_argument('robot_scripts',
                     nargs='*')
 args = parser.parse_args()
 
+def read_file(fn):
+    with open(fn, 'r') as f:
+        return f.read()
+
 robot_scripts = args.robot_scripts
 prompt = "Enter the names of the Python files to run, separated by commas: "
 while not robot_scripts:
     robot_script_names = raw_input(prompt).split(',')
     if robot_script_names == ['']: continue
-    robot_scripts = [open(s.strip()) for s in robot_script_names]
+    robot_scripts = [read_file(s.strip()) for s in robot_script_names]
 
 with args.config as f:
     config = yaml.load(f)
