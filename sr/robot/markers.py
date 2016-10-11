@@ -35,7 +35,7 @@ class Token(GameObject):
         super(Token, self).__init__(arena)
         self.marker_info = create_marker_info_by_type(marker_type, number)
         self.grabbed = False
-        WIDTH=0.08
+        WIDTH = 0.08
         self._body.create_polygon_fixture([(-WIDTH, -WIDTH),
                                            ( WIDTH, -WIDTH),
                                            ( WIDTH,  WIDTH),
