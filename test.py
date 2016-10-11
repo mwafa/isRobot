@@ -6,7 +6,9 @@ SEARCHING, DRIVING = range(2)
 
 R = Robot()
 
-token_filter = lambda m: m.info.marker_type == MARKER_TOKEN
+MARKER_TOKENS = (MARKER_TOKEN, MARKER_TOKEN_A, MARKER_TOKEN_B, MARKER_TOKEN_C)
+
+token_filter = lambda m: m.info.marker_type in MARKER_TOKENS
 
 def drive(speed, seconds):
     R.motors[0].m0.power = speed

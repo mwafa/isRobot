@@ -6,4 +6,8 @@ from .vision import (
 
     MARKER_PEDESTAL,
     MARKER_TOKEN,
+
+    MARKER_TOKEN_A,
+    MARKER_TOKEN_B,
+    MARKER_TOKEN_C,
 )
