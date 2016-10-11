@@ -3,6 +3,8 @@ from __future__ import division
 from math import pi
 from random import random
 
+import pygame
+
 from ..display import get_surface, PIXELS_PER_METER
 from ..markers import WallMarker, Token
 
@@ -23,6 +25,12 @@ CORNER_COLOURS = (
     (0xff, 0xff, 0x00),
 )
 
+def towards_zero(point, dist):
+    if point < 0:
+        return point + dist
+    else:
+        return point - dist
+
 def apply_transparency(foreground, background, opacity):
     def helper(fore, back):
         return back + (fore-back)*opacity
@@ -34,6 +42,43 @@ def fade_to_white(colour, opacity = 0.6):
 
 def lerp(delta, a, b):
     return delta*b + (1-delta)*a
+
+def draw_triangular_corner_zones(arena, display, surface):
+    """
+    Draw triangular corner zones for the given arena onto the given display.
+    """
+
+    def get_coord(x, y):
+        return display.to_pixel_coord((x, y), arena)
+
+    # Lines separating zones
+    def line(start, end):
+        pygame.draw.line(surface, ARENA_MARKINGS_COLOR, \
+                         start, end, ARENA_MARKINGS_WIDTH)
+
+    def starting_zone(corner_pos):
+        x, y = corner_pos
+        length = arena.starting_zone_side
+        a = get_coord(towards_zero(x, length), y)
+        b = get_coord(x, towards_zero(y, length))
+        c = (a[0], b[1])
+
+        line(a, c)
+        line(b, c)
+
+    def scoring_zone(corner_pos, colour):
+        x, y = corner_pos
+        length = arena.scoring_zone_side
+        a = get_coord(towards_zero(x, length), y)
+        b = get_coord(x, towards_zero(y, length))
+        c = get_coord(x, y)
+
+        pygame.draw.polygon(surface, colour, (a, b, c), 0)
+
+    for i, pos in enumerate(arena.corners):
+        colour = fade_to_white(CORNER_COLOURS[i])
+        scoring_zone(pos, colour)
+        starting_zone(pos)
 
 class Arena(object):
     size = (8, 8)

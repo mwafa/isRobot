@@ -1,11 +1,10 @@
 from __future__ import division
 
-import pygame
 from math import pi
 from random import random
 
-from arena import Arena, ARENA_MARKINGS_COLOR, ARENA_MARKINGS_WIDTH, \
-                    CORNER_COLOURS, fade_to_white
+from arena import Arena, draw_triangular_corner_zones
+
 from ..markers import Token
 
 def token_positions(separation):
@@ -39,39 +38,4 @@ class SunnySideUpArena(Arena):
     def draw_background(self, surface, display):
         super(SunnySideUpArena, self).draw_background(surface, display)
 
-        def get_coord(x, y):
-            return display.to_pixel_coord((x, y), self)
-
-        def towards_zero(point, dist):
-            if point < 0:
-                return point + dist
-            else:
-                return point - dist
-
-        # Lines separating zones
-        def line(start, end):
-            pygame.draw.line(surface, ARENA_MARKINGS_COLOR, \
-                             start, end, ARENA_MARKINGS_WIDTH)
-
-        def starting_zone(x, y):
-            length = self.starting_zone_side
-            a = get_coord(towards_zero(x, length), y)
-            b = get_coord(x, towards_zero(y, length))
-            c = (a[0], b[1])
-
-            line(a, c)
-            line(b, c)
-
-        def scoring_zone(corner_pos, colour):
-            x, y = corner_pos
-            length = self.scoring_zone_side
-            a = get_coord(towards_zero(x, length), y)
-            b = get_coord(x, towards_zero(y, length))
-            c = get_coord(x, y)
-
-            pygame.draw.polygon(surface, colour, (a, b, c), 0)
-
-        for i, pos in enumerate(self.corners):
-            colour = fade_to_white(CORNER_COLOURS[i])
-            scoring_zone(pos, colour)
-            starting_zone(*pos)
+        draw_triangular_corner_zones(self, display, surface)
