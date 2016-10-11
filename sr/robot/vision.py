@@ -1,20 +1,24 @@
 from collections import namedtuple
 
-# From pyenv.git/pylib/sr/vision.py
-MARKER_ARENA, MARKER_ROBOT, MARKER_PEDESTAL, MARKER_TOKEN = range(4)
+# From sr-robot.git/sr/robot/vision.py
+MARKER_ARENA, MARKER_ROBOT = 'arena', 'robot'
+MARKER_PEDESTAL = 'pedestal'
+MARKER_TOKEN = 'token'
 
 marker_offsets = {
     MARKER_ARENA: 0,
     MARKER_ROBOT: 28,
+
     MARKER_PEDESTAL: 32,
-    MARKER_TOKEN: 41
+    MARKER_TOKEN: 41,
 }
 
 marker_sizes = {
     MARKER_ARENA: 0.25 * (10.0/12),
     MARKER_ROBOT: 0.1 * (10.0/12),
+
     MARKER_PEDESTAL: 0.2 * (10.0/12),
-    MARKER_TOKEN: 0.2 * (10.0/12)
+    MARKER_TOKEN: 0.2 * (10.0/12),
 }
 
 # MarkerInfo class
