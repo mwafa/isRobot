@@ -1,10 +1,10 @@
 from __future__ import division
 
 import pygame
-from random import random
 from math import pi
 
-from arena import Arena, ARENA_MARKINGS_COLOR, ARENA_MARKINGS_WIDTH
+from .arena import Arena, ARENA_MARKINGS_COLOR, ARENA_MARKINGS_WIDTH
+
 from ..markers import Token
 from ..game_object import GameObject
 

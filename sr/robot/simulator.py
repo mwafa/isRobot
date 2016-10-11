@@ -1,9 +1,10 @@
 from __future__ import division
 
-import threading, time, pygame
+import threading
+import pygame
 
-from arenas import PiratePlunderArena, CTFArena, SunnySideUpArena
-from display import Display
+from .arenas import PiratePlunderArena, CTFArena, SunnySideUpArena
+from .display import Display
 
 DEFAULT_GAME = 'pirate-plunder'
 

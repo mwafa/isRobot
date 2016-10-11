@@ -1,8 +1,7 @@
-import sys
+
 import yaml
 import threading
 import argparse
-from math import pi
 
 from sr.robot import *
 

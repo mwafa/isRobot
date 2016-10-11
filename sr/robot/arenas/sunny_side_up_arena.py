@@ -1,9 +1,8 @@
 from __future__ import division
 
 from math import pi
-from random import random
 
-from arena import Arena, draw_triangular_corner_zones
+from .arena import Arena, draw_triangular_corner_zones
 
 from ..markers import Token
 

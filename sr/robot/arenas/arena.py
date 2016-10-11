@@ -1,12 +1,11 @@
 from __future__ import division
 
 from math import pi
-from random import random
 
 import pygame
 
-from ..display import get_surface, PIXELS_PER_METER
-from ..markers import WallMarker, Token
+from ..display import get_surface
+from ..markers import WallMarker
 
 import threading
 

@@ -1,5 +1,5 @@
-from game_object import GameObject
-from vision import create_marker_info_by_type, MARKER_TOKEN, MARKER_ARENA
+from .game_object import GameObject
+from .vision import create_marker_info_by_type, MARKER_TOKEN, MARKER_ARENA
 
 import pypybox2d
 

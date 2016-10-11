@@ -5,8 +5,8 @@ from __future__ import division
 import time, exceptions
 from math import pi, sin, cos, degrees, hypot, atan2
 
-from game_object import GameObject
-from vision import Marker, Point, PolarCoord, create_marker_info_by_type, MARKER_ROBOT
+from .game_object import GameObject
+from .vision import Marker, Point, PolarCoord, create_marker_info_by_type, MARKER_ROBOT
 
 import pypybox2d
 

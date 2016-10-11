@@ -4,7 +4,8 @@ import pygame
 from math import pi
 from random import random
 
-from arena import Arena, ARENA_MARKINGS_COLOR, ARENA_MARKINGS_WIDTH
+from .arena import Arena, ARENA_MARKINGS_COLOR, ARENA_MARKINGS_WIDTH
+
 from ..markers import Token
 
 class PiratePlunderArena(Arena):
