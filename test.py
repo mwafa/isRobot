@@ -32,14 +32,14 @@ while True:
         tokens = filter(token_filter, R.see())
         if len(tokens) > 0:
             m = tokens[0]
-            print "Token sighted. {0} is {1}m away, bearing {2} degrees." \
-                  .format(m.info.offset, m.dist, m.rot_y)
-            state = DRIVING
+            print "Token sighted. {3}-{0} is {1}m away, bearing {2} degrees. " \
+                  .format(m.info.offset, m.dist, m.rot_y, m.info.marker_type)
+        #     state = DRIVING
 
-        else:
-            print "Can't see anything."
-            turn(25, 0.3)
-            time.sleep(0.2)
+        # else:
+        print "Can't see anything."
+        turn(25, 0.6)
+        time.sleep(0.2)
 
     elif state == DRIVING:
         print "Aligning..."

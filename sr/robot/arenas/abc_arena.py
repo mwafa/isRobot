@@ -15,7 +15,8 @@ def token_positions(separation):
     offsets = (-separation, 0, separation)
     for x_pos in offsets:
         for y_pos in offsets:
-            yield x_pos, y_pos
+            if (x_pos,y_pos) != (0,0):
+                yield x_pos, y_pos
 
 class ABCArena(Arena):
     # start_locations = [(-3.6, -3.6),
@@ -41,20 +42,20 @@ class ABCArena(Arena):
         token_types = [
             (MARKER_TOKEN_A, 0),
             (MARKER_TOKEN_B, 0),
-            (MARKER_TOKEN_A, 1),
-            (MARKER_TOKEN_B, 1),
             (MARKER_TOKEN_C, 0),
-            (MARKER_TOKEN_B, 2),
+            (MARKER_TOKEN_A, 1),
+            (MARKER_TOKEN_C, 1),
             (MARKER_TOKEN_A, 2),
-            (MARKER_TOKEN_B, 3),
-            (MARKER_TOKEN_A, 3),
+            (MARKER_TOKEN_B, 2),
+            (MARKER_TOKEN_C, 2),
+            # (MARKER_TOKEN_A, 3),
         ]
 
         for pos, (marker_type, offset) in zip(positions, token_types):
-            if pos != (0,0):
-                token = Token(self, offset, damping=10, marker_type=marker_type)
-                token.location = pos
-                self.objects.append(token)
+            print pos
+            token = Token(self, offset, damping=10, marker_type=marker_type)
+            token.location = pos
+            self.objects.append(token)
 
     def draw_background(self, surface, display):
         super(ABCArena, self).draw_background(surface, display)
