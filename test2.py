@@ -27,7 +27,6 @@ def turn(speed, seconds):
 state = SEARCHING
 
 while True:
-    print(R.see())
     if state == SEARCHING:
         print "Searching..."
         tokens = filter(token_filter, R.see())
