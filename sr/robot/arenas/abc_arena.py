@@ -18,11 +18,13 @@ def token_positions(separation):
             yield x_pos, y_pos
 
 class ABCArena(Arena):
-    start_locations = [(-3.6, -3.6),
-                       ( 3.6, -3.6),
-                       ( 3.6,  3.6),
-                       (-3.6,  3.6)]
+    # start_locations = [(-3.6, -3.6),
+    #                    ( 3.6, -3.6),
+    #                    ( 3.6,  3.6),
+    #                    (-3.6,  3.6)]
 
+    start_locations = [(0,0) for i in range(4)] #agar posisi robotnya di tengah
+                       
     start_headings = [0.25*pi,
                       0.75*pi,
                       -0.75*pi,
@@ -49,9 +51,10 @@ class ABCArena(Arena):
         ]
 
         for pos, (marker_type, offset) in zip(positions, token_types):
-            token = Token(self, offset, damping=10, marker_type=marker_type)
-            token.location = pos
-            self.objects.append(token)
+            if pos != (0,0):
+                token = Token(self, offset, damping=10, marker_type=marker_type)
+                token.location = pos
+                self.objects.append(token)
 
     def draw_background(self, surface, display):
         super(ABCArena, self).draw_background(surface, display)
