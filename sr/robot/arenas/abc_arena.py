@@ -40,14 +40,14 @@ class ABCArena(Arena):
         # Positions are top-to-bottom, left-to-right
         positions = token_positions(separation=1.5)
         token_types = [
-            (MARKER_TOKEN_A, 0),
-            (MARKER_TOKEN_B, 0),
-            (MARKER_TOKEN_C, 0),
+            (MARKER_TOKEN_A, 5),
             (MARKER_TOKEN_A, 1),
-            (MARKER_TOKEN_C, 1),
+            (MARKER_TOKEN_A, 8),
             (MARKER_TOKEN_A, 2),
-            (MARKER_TOKEN_B, 2),
-            (MARKER_TOKEN_C, 2),
+            (MARKER_TOKEN_A, 4),
+            (MARKER_TOKEN_A, 6),
+            (MARKER_TOKEN_A, 3),
+            (MARKER_TOKEN_A, 7),
             # (MARKER_TOKEN_A, 3),
         ]
 
