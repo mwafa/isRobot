@@ -4,6 +4,10 @@ import time
 
 SEARCHING, DRIVING = range(2)
 
+WAKTU = time.time()
+
+FAKTOR = 1
+
 R = Robot()
 
 MARKER_TOKENS = (MARKER_TOKEN, MARKER_TOKEN_A, MARKER_TOKEN_B, MARKER_TOKEN_C)
@@ -44,16 +48,18 @@ while True:
             # print "Token sighted. {3}-{0} is {1}m away, bearing {2} degrees. " \
             #       .format(m.info.offset, m.dist, m.rot_y, m.info.marker_type)
             state = DRIVING
+            FAKTOR *= -1
             print (m.info.marker_type, m.info.offset)
+            print "*"*30
         # print (R.see())
 
         # else:
         # print "Can't see anything."
-        turn(25, 0.1)
+        turn(50*FAKTOR, 0.1)
         # time.sleep(0.2)
 
     elif state == DRIVING:
-        print "Aligning..."
+        # print "Aligning..."
         # tokens = filter(token_filter, R.see())
         tokens = myFilter(myTokenFilter,R.see())
         if len(tokens) == 0:
@@ -72,19 +78,21 @@ while True:
                     if tokenKe < 8:
                         tokenKe += 1
                     else:
+                        print(time.time()-WAKTU)
                         exit() 
                 else:
                     print "Aww, I'm not close enough."
                 # exit()
 
-            elif -3 <= m.rot_y <= 3:
+            elif -15 <= m.rot_y <= 15:
                 print "Ah, that'll do."
                 drive(100, m.dist/2)
+                FAKTOR = 1 if m.rot_y > 0 else -1
 
-            elif m.rot_y < -3:
+            elif m.rot_y < -15:
                 print "Left a bit..."
                 turn(-12.5, 0.1)
 
-            elif m.rot_y > 3:
+            elif m.rot_y > 15:
                 print "Right a bit..."
                 turn (12.5, 0.1)
