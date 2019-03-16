@@ -2,11 +2,13 @@ from sr.robot import *
 
 import time
 
-SEARCHING, DRIVING = range(2)
+SEARCHING, DRIVING, HOME = range(3)
 
 WAKTU = time.time()
 
 FAKTOR = 1
+
+
 
 R = Robot()
 
@@ -17,6 +19,8 @@ MARKER_TOKENS = (MARKER_TOKEN, MARKER_TOKEN_A, MARKER_TOKEN_B, MARKER_TOKEN_C)
 myFilter  = lambda filter,tokens: [token for token in tokens if filter(token)]
 
 tokenKe = 1
+
+kontra = [10,17,24,3,13,20,27,6]
 
 myTokenFilter = lambda x: True if x.info.marker_type == 'token-a' and x.info.offset == tokenKe else False
 
@@ -70,16 +74,17 @@ while True:
             if m.dist < 0.4:
                 print "Found it!"
                 if R.grab():
-                    print "Gotcha!"
-                    turn(-50, 0.5)
-                    drive(50, 1)
-                    R.release()
-                    drive(-50, 0.5)
-                    if tokenKe < 8:
-                        tokenKe += 1
-                    else:
-                        print(time.time()-WAKTU)
-                        exit() 
+                    state = HOME
+                    # print "Gotcha!"
+                    # turn(-50, 0.5)
+                    # drive(50, 1)
+                    # R.release()
+                    # drive(-50, 0.5)
+                    # if tokenKe < 8:
+                    #     tokenKe += 1
+                    # else:
+                    #     print(time.time()-WAKTU)
+                    #     exit() 
                 else:
                     print "Aww, I'm not close enough."
                 # exit()
@@ -96,3 +101,43 @@ while True:
             elif m.rot_y > 15:
                 print "Right a bit..."
                 turn (12.5, 0.1)
+
+    elif state == HOME:
+        tokens = myFilter(lambda x: True if x.info.marker_type == "arena" and x.info.offset == kontra[tokenKe-1] else False,R.see())
+        if len(tokens) == 0:
+            # state = SEARCHING
+            turn(50, 0.1)
+        else:
+            m = tokens[0]
+            jarak = 4.5 if tokenKe < 5 else 5.5
+            if m.dist < jarak:
+                    print "Found it!"
+                    if R.release():
+                        state = SEARCHING
+                        # print "Gotcha!"
+                        # turn(-50, 0.5)
+                        # drive(50, 1)
+                        # R.release()
+                        drive(-100, 1)
+                        if tokenKe < 8:
+                            tokenKe += 1
+                        else:
+                            print(time.time()-WAKTU)
+                            exit() 
+                    else:
+                        print "Aww, I'm not close enough."
+                    # exit()
+
+            elif -10 <= m.rot_y <= 10:
+                print "Ah, that'll do."
+                drive(100, 0.1)
+                FAKTOR = 1 if m.rot_y > 0 else -1
+
+            elif m.rot_y < -10:
+                print "Left a bit..."
+                turn(-12.5, 0.1)
+
+            elif m.rot_y > 10:
+                print "Right a bit..."
+                turn (12.5, 0.1)
+
