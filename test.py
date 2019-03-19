@@ -18,7 +18,7 @@ myFilter  = lambda filter,tokens: [token for token in tokens if filter(token)]
 
 tokenKe = 1
 
-myTokenFilter = lambda x: True if x.info.marker_type == 'token-a' and x.info.offset == tokenKe else False
+myTokenFilter = lambda x: True if x.info.marker_type == 'token-c' and x.info.offset == tokenKe else False
 
 def drive(speed, seconds):
     R.motors[0].m0.power = speed

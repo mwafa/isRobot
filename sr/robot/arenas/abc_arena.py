@@ -15,8 +15,7 @@ def token_positions(separation):
     offsets = (-separation, 0, separation)
     for x_pos in offsets:
         for y_pos in offsets:
-            if (x_pos,y_pos) != (0,0):
-                yield x_pos, y_pos
+            yield x_pos, y_pos
 
 class ABCArena(Arena):
     # start_locations = [(-3.6, -3.6),
@@ -24,12 +23,16 @@ class ABCArena(Arena):
     #                    ( 3.6,  3.6),
     #                    (-3.6,  3.6)]
 
-    start_locations = [(0,0) for i in range(4)] #agar posisi robotnya di tengah
+    # start_locations = [(0,0) for i in range(4)] #agar posisi robotnya di tengah
                        
-    start_headings = [0.25*pi,
-                      0.75*pi,
-                      -0.75*pi,
-                      -0.25*pi]
+    # start_headings = [0.25*pi,
+    #                   0.75*pi,
+    #                   -0.75*pi,
+    #                   -0.25*pi]
+
+    start_locations = [(-3.6, 3.6), (3.6, -3.6), (3.6, 3.6), (-3.6, 3.6)]
+
+    start_headings = [0.8*pi, 0.2*pi, -0.8*pi, -0.2*pi]
 
     starting_zone_side = 1
     scoring_zone_side = 2
@@ -40,19 +43,17 @@ class ABCArena(Arena):
         # Positions are top-to-bottom, left-to-right
         positions = token_positions(separation=1.5)
         token_types = [
-            (MARKER_TOKEN_A, 5),
-            (MARKER_TOKEN_A, 1),
-            (MARKER_TOKEN_A, 8),
-            (MARKER_TOKEN_A, 2),
-            (MARKER_TOKEN_A, 4),
-            (MARKER_TOKEN_A, 6),
-            (MARKER_TOKEN_A, 3),
-            (MARKER_TOKEN_A, 7),
-            # (MARKER_TOKEN_A, 3),
-        ]
+                (MARKER_TOKEN_A, 0), 
+                (MARKER_TOKEN_C, 0), 
+                (MARKER_TOKEN_A, 0), 
+                (MARKER_TOKEN_C, 1), 
+                (MARKER_TOKEN_B, 0), 
+                (MARKER_TOKEN_A, 0), 
+                (MARKER_TOKEN_B, 0), 
+                (MARKER_TOKEN_C, 0), 
+                (MARKER_TOKEN_B, 0),]
 
         for pos, (marker_type, offset) in zip(positions, token_types):
-            print pos
             token = Token(self, offset, damping=10, marker_type=marker_type)
             token.location = pos
             self.objects.append(token)
