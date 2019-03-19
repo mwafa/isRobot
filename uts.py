@@ -1,7 +1,7 @@
 from sr.robot import *
 
 import time
-
+TIME = time.time()
 R = Robot()
 
 def drive(speed):
@@ -18,28 +18,34 @@ DERAJAT = 5
 state = FIND
 
 while True:
-    if state == FIND:
-        tokens = filter(lambda m: m.info.marker_type == MARKER_TOKEN_C and m.info.offset == 1 ,R.see())
-    else:
-        tokens = filter(lambda m: m.info.marker_type == MARKER_ARENA and m.info.offset == 21 ,R.see())
+    FAKTOR = 0 if state == FIND else -12
+
+    marker,offset = (MARKER_TOKEN_C,1) if state == FIND else (MARKER_ARENA,21)
+    tokens = filter(lambda m: m.info.marker_type == marker and 
+                        m.info.offset == offset ,R.see())
     
     if len(tokens) < 1:
         turn(-100)
     else:
         m = tokens[0]
         DIST = .4 if state == FIND else 1
-        if m.dist < 0.4 :
+        if m.dist < DIST:
             if state == FIND:
                 if R.grab():
                     print "yay"
-                    drive(0)
                     state = HOME
                     # exit()
             else:
                 drive(0)
+                turn(-100)
+                time.sleep(.1)
+                drive(75)
+                time.sleep(1)
+                drive(0)
+                print time.time()-TIME
                 exit()
-                
-        elif -DERAJAT <= m.rot_y <= DERAJAT:
+ 
+        elif -DERAJAT <= m.rot_y+FAKTOR <= DERAJAT:
             drive(100)
         elif m.rot_y < -DERAJAT:
             turn(-50)
