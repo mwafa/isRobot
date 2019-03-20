@@ -4,6 +4,12 @@ import time
 
 # Tantangan Kelompok 9:
 # Mengambil token sesuai urutan tertentu dan mengumpulkanya ke tengah.
+# Anggota:
+    # Muhammad Wafa             (15/384853/TK/43515)
+    # Muhammad ishlahul muzakki (15/384850/TK/43512)
+    # Yahya Bachtiar            (17/410193/TK/45550)
+    # Ansensius Sihotang        (15/378763/TK/42705)
+
 
 
 

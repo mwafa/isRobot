@@ -1,3 +1,13 @@
+# Tugas 1: Kelompok 9
+# Mengambil token sesuai dengan urutan tertentu.
+# Anggota:
+    # Muhammad Wafa             (15/384853/TK/43515)
+    # Muhammad ishlahul muzakki (15/384850/TK/43512)
+    # Yahya Bachtiar            (17/410193/TK/45550)
+    # Ansensius Sihotang        (15/378763/TK/42705)
+
+
+
 from sr.robot import *
 
 import time
